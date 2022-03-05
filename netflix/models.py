@@ -56,7 +56,7 @@ class Movie(models.Model):
     type = models.CharField(_("age limit"), choices=MOVIE_CHOICES, max_length=50)
     video = models.ManyToManyField("Video", verbose_name=_("video"))
     image = models.ImageField(_("image"), upload_to='cover/', blank=True, null=True)
-    age_choices = models.CharField(_("age limit"), choices=AGE_CHOICES, max_length=50)
+    age_limit = models.CharField(_("age limit"), choices=AGE_CHOICES, max_length=50)
 
 
     

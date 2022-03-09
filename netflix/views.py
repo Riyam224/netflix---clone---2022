@@ -1,7 +1,7 @@
 from cProfile import Profile
 from re import L
 from unicodedata import name
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 # Create your views here.
 from .models import Profile , Movie
@@ -58,7 +58,7 @@ class ProfileCreate(View):
 
 # todo movie list for profile 
 
-
+method_decorator(login_required , name='dispatch')
 class MovieList(View):
     def get(self, request , profile_id, *args, **kwargs):
 
@@ -76,3 +76,29 @@ class MovieList(View):
 
         except Profile.DoesNotExist:
             return redirect('netflix:ProfileList')
+
+
+# @login_required
+# class MovieDetail(View):
+#     def get(self, request ,movie_id, *args, **kwargs):
+        
+#         try:
+#             movie = Movie.objects.get(uuid=movie_id)
+
+#             context = {
+#                 'movie': movie
+#             }
+
+#             return render(request , 'moviedetail.html' , context)
+
+#         except Movie.DoesNotExist:
+#             return redirect('netflix:ProfileList')
+
+@login_required
+def movie_detail(request , movie_id):
+    movie = get_object_or_404(Movie , uuid=movie_id)
+    context = {
+        'movie': movie
+    }
+
+    return render(request , 'moviedetail.html', context)

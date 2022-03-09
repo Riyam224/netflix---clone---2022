@@ -41,6 +41,8 @@
 
                     <div class=" h-40 m-4  bg-blue-500 flex-shrink-0 rounded-md cursor-pointer w-40">
                         <img src="{{ movie.image.url }}" class="w-full h-full " alt="">
+                        <br>
+                        <h3><a href="{% url 'netflix:MovieDetail' movie_id=movie.uuid %}">{{ movie.title }}</a></h3>
                     </div>
                     
                     {% endfor %}

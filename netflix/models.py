@@ -8,7 +8,8 @@ import uuid
 from django.utils.translation import gettext as _
 
 from django.forms import UUIDField
-
+from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 
@@ -57,8 +58,8 @@ class Movie(models.Model):
     video = models.ManyToManyField("Video", verbose_name=_("video"))
     image = models.ImageField(_("image"), upload_to='cover/', blank=True, null=True)
     age_limit = models.CharField(_("age limit"), choices=AGE_CHOICES, max_length=50)
-
-
+    slug = models.SlugField(_("slug") , blank=True, null=True)
+   
     
 
     class Meta:
@@ -68,6 +69,9 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("netflix:MovieDetail", kwargs={"slug": self.slug})
+   
 
 class Video(models.Model):
     title = models.CharField(_("title"), max_length=1500)

@@ -102,3 +102,16 @@ def movie_detail(request , movie_id):
     }
 
     return render(request , 'moviedetail.html', context)
+
+
+
+def movie_play(request , movie_id):
+    movie = get_object_or_404(Movie , uuid=movie_id)
+    movie  =  movie.video.values()
+
+
+    context = {
+        'movie': list(movie)
+    }
+
+    return render(request , 'movieplay.html', context)

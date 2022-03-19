@@ -15,4 +15,5 @@ urlpatterns = [
 
     path('watch/<str:profile_id>/' , views.MovieList.as_view() , name='MovieList'),
     path('watch/detail/<str:movie_id>/' , views.movie_detail, name='MovieDetail'),
+    path('watch/play/<str:movie_id>/' , views.movie_play, name='MoviePlay'),
 ]

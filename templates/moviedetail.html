@@ -20,9 +20,11 @@
 
                     <button class="flex items-center bg-white py-2 px-5 rounded-md">
                         <ion-icon name="play" class="text-2xl"></ion-icon>
-                        <span class="ml-3 font-medium">
-                            Play
-                        </span>
+                        <a href="{% url 'netflix:MoviePlay' movie_id=movie.uuid %}">
+                            <span class="ml-3 font-medium" style="color:black; font-weight:bold">
+                                Play
+                            </span>
+                        </a>
                     </button>
     
                     

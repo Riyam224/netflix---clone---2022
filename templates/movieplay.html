@@ -1,0 +1,26 @@
+{% extends 'netflix/base.html' %}
+ 
+{% load static %}
+
+{% block content  %}
+
+    <main class="bg-primary_black h_full w_full">
+        
+        {{ movie|json_script:"movie_data"}}
+
+        <video src="" controls class="w-full h-screen player">
+
+        </video>
+    </main>
+
+    <script> 
+        const videoE1 = document.querySelector('video')
+        const movie_data = JSON.parse(document.getElementById('movie_data').textContent)
+        const url = new URL(location.href)
+        const video_param = parseInt(url.searchParams.get('api'))?parseInt(url.searchParams.get('api')):0
+        videoE1.setAttribute('src' , `http://localhost:8000/media/${movie_data[video_param].file}`)
+    </script>
+
+
+
+{% endblock content  %}
